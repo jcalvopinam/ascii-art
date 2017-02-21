@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="asciiApp">
+<head>
+    <title>ASCII ART</title>
+    <meta charset="utf-8"/>
+    <!-- Bootstrap CSS library (http://getbootstrap.com/getting-started/#download) -->
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css"/>
+
+    <!-- AsciiApp CSS libraries -->
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body>
+<div class="container" ng-controller="AsciiController">
+    <h3 align="center">{{ headingTitle }}</h3>
+    <br/>
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-heading">Convert your text to ASCII ART</div>
+            <div class="panel-body">
+                <label>Enter your text: </label>
+                <br/>
+                <textarea rows="3" cols="155" ng-model="newString"/>
+                {{newString}}
+                <br/><br/>
+                <button class="btn btn-primary" onclick="javascript:alert('Missing implementation')">Convert</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!-- AngularJS library (https://code.angularjs.org/1.6.2/) -->
+<script type="text/javascript" src="libs/angularjs/angular.min.js"/>
+
+<!-- jQuery library (https://code.jquery.com/jquery-3.0.0.min.js) -->
+<script type="text/javascript" src="libs/jquery/jquery-3.0.0.min.js"/>
+
+<!-- Bootstrap JS library (http://getbootstrap.com/getting-started/#download)-->
+<script src="libs/bootstrap/js/bootstrap.min.js"/>
+
+<!-- AsciiApp libraries -->
+<script type="text/javascript" src="js/app.js"/>
+<script type="text/javascript" src="js/asciiController.js"/>
+
+</html>
