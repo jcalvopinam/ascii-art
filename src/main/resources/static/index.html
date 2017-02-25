@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="asciiApp">
+<head>
+    <title>ASCII ART</title>
+    <meta charset="utf-8"/>
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Bootstrap CSS library (http://getbootstrap.com/getting-started/#download) -->
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css"/>
+
+    <!-- AsciiApp CSS libraries -->
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <!-- AngularJS library (https://code.angularjs.org/1.6.2/) -->
+    <script src="libs/angularjs/angular.min.js"></script>
+    <script src="libs/angularjs/angular-route.min.js"></script>
+
+    <!-- jQuery library (https://code.jquery.com/jquery-3.0.0.min.js) -->
+    <script src="libs/jquery/jquery-3.0.0.min.js"></script>
+
+    <!-- Bootstrap JS library (http://getbootstrap.com/getting-started/#download)-->
+    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- AsciiApp libraries -->
+    <script src="js/app.js"></script>
+    <script src="js/asciiController.js"></script>
+</head>
+
+<body>
+<div class="container" ng-controller="AsciiController">
+    <h3 align="center">{{ headingTitle }}</h3>
+    <br/>
+    <div class="panel-group">
+        <div class="panel panel-info">
+            <div class="panel-heading">Convert your text to ASCII ART</div>
+            <div class="panel-body">
+                <div class="row-fluid">
+                    <div class="col-lg-9">
+                        <form name="form">
+                            <label>Enter your text: </label>
+                            <span ng-show="form.$invalid">Please enter something!</span>
+                            <input id="newText" type="text" ng-model="textToConvert" autofocus
+                                   placeholder="Please enter something!" required
+                                   ng-keypress="($event.charCode==13) ? convertText() : return">
+                        </form>
+                    </div>
+                    <div class="col-lg-3 pull-right" style="text-align:right">
+                        <br/>
+                        <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="convertText()">Convert
+                        </button>
+                        <button class="btn btn-default" ng-click="cleanFields()">Clean</button>
+                        <a class="btn btn-success glyphicon glyphicon-download-alt" ng-click="downloadText()"
+                           ng-href="{{ url }}" ng-disabled="responseArt ===''"></a>
+                        <br/>
+                    </div>
+                    <p>
+                        <br/><br/><br/><br/>
+                        <label>Text ASCII Art: </label>
+                        <textarea rows="23" cols="135" ng-model="responseArt" readonly></textarea>
+                        <br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
