@@ -7,17 +7,17 @@ app.controller('AsciiController', function ($scope, $http) {
     const pathArray = location.pathname.split('/');
     const appContext = pathArray[1];
     const baseUrl = location.protocol + '//' + location.host + '/' + appContext + '/';
-    const urlImage = "(http(s?):)|([/|.|\w|\s])*";
-    const imageExtension = "\.(?:jpg|gif|png)";
+    const urlImage = "^(?:http(s?)://)";
+    const imageExtension = "\.(jpg|jpeg|png|gif)$";
 
-    $scope.headingTitle = "ASCII ART PAGE";
+    $scope.headingTitle = "Convert your text to ASCII ART";
     $scope.info = "Please enter some text or an image from URL!";
     $scope.textToConvert = "";
     $scope.responseArt = "";
 
     $scope.convert = function () {
-        var url = new RegExp(urlImage.regex);
-        var image = new RegExp(imageExtension.regex);
+        var url = new RegExp(urlImage);
+        var image = new RegExp(imageExtension);
         if ($scope.textToConvert.match(url)) {
             if ($scope.textToConvert.match(image)) {
                 $http({

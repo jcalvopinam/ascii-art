@@ -2,12 +2,28 @@ textarea {
     font-family: Monospace;
     white-space: pre;
     resize: none;
+    border: 0;
 }
 
 input[type=text] {
+    padding: 5px;
     width: 855px;
+    border: 0;
+    border-bottom: 1px solid dodgerblue;
 }
 
 span {
     color: crimson;
+}
+
+.form-container {
+    margin-top: 70px;
+}
+
+.button-container {
+    margin-top: 3px;
+    text-align: right;
+}
+p{
+    padding: 15px;
 }
