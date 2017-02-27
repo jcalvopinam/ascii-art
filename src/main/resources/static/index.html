@@ -41,13 +41,13 @@
                             <label>Enter your text: </label>
                             <span ng-show="form.$invalid">Please enter something!</span>
                             <input id="newText" type="text" ng-model="textToConvert" autofocus
-                                   placeholder="Please enter something!" required
-                                   ng-keypress="($event.charCode==13) ? convertText() : return">
+                                   placeholder="{{info}}" required
+                                   ng-keypress="($event.charCode==13) ? convert() : return">
                         </form>
                     </div>
                     <div class="col-lg-3 pull-right" style="text-align:right">
                         <br/>
-                        <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="convertText()">Convert
+                        <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="convert()">Convert
                         </button>
                         <button class="btn btn-default" ng-click="cleanFields()">Clean</button>
                         <a class="btn btn-success glyphicon glyphicon-download-alt" ng-click="downloadText()"
