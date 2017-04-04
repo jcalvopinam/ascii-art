@@ -1,1 +1,27 @@
-*.java linguist-language=Java
+# Set JAVA project
+*.java          linguist-language=Java
+#
+# set all files NOT found below
+* text=auto
+#
+*.css           text
+*.html          text
+*.java          text
+*.js            text
+*.json          text
+*.properties    text
+*.sh            text
+*.txt           text
+*.xml           text
+*.yml           text
+
+# These files are binary
+*.class         binary
+*.ear           binary
+*.gif           binary
+*.ico           binary
+*.jar           binary
+*.jpg           binary
+*.jpeg          binary
+*.png           binary
+*.war           binary
