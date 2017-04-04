@@ -1,34 +1,32 @@
 package com.jcalvopinam.controller;
 
+import com.jcalvopinam.dto.AsciiDto;
 import com.jcalvopinam.service.AsciiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author juanca <juan.calvopina+dev@gmail.com>
  */
-@Controller
+@RestController
 public class AsciiController {
 
     @Autowired
     AsciiService asciiService;
 
-    @RequestMapping(value = "/convertText", method = RequestMethod.POST, produces = "text/plain")
+    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = "text/plain")
     @ResponseBody
-    public String getAsciiText(@RequestBody String text) {
-        return asciiService.convertText(text);
+    public String generateAscii(@RequestBody AsciiDto asciiDto) throws IOException {
+        AsciiDto.isNotNull(asciiDto);
+        return asciiService.generateAscii(asciiDto);
     }
 
-    @RequestMapping(value = "/convertImage", method = RequestMethod.POST, produces = "text/plain")
-    @ResponseBody
-    public String getAsciiImage(@RequestBody String url) throws IOException {
-        return asciiService.convertImage(url);
+    @RequestMapping(value = "/fonts", method = RequestMethod.GET)
+    public List<String> getFonts() {
+        return asciiService.findAllFonts();
     }
 
 }

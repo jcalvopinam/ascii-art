@@ -1,14 +1,17 @@
 package com.jcalvopinam.service;
 
+import com.jcalvopinam.dto.AsciiDto;
+
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author juanca <juan.calvopina+dev@gmail.com>
  */
 public interface AsciiService {
 
-    String convertText(String text);
+    String generateAscii(AsciiDto asciiDto) throws IOException;
 
-    String convertImage(String url) throws IOException;
+    List<String> findAllFonts();
 
 }
