@@ -7,9 +7,19 @@ textarea {
 
 input[type=text] {
     padding: 5px;
-    width: 855px;
+    width: 650px;
     border: 0;
     border-bottom: 1px solid dodgerblue;
+}
+
+button{
+    width: 90px;
+}
+
+select.form-control {
+    padding: 5px;
+    width: 145px;
+    margin-left: 15%;
 }
 
 span {
@@ -24,6 +34,7 @@ span {
     margin-top: 3px;
     text-align: right;
 }
+
 p{
     padding: 15px;
 }

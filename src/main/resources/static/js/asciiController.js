@@ -6,7 +6,7 @@ app.controller('AsciiController', function ($scope, $http) {
 
     const pathArray = location.pathname.split('/');
     const appContext = pathArray[1];
-    const baseUrl = location.protocol + '//' + location.host + '/' + appContext + '/';
+    const baseUrl = location.protocol + '//' + location.host + '/' + appContext;
     const urlImage = "^(?:http(s?)://)";
     const imageExtension = "\.(jpg|jpeg|png|gif)$";
 
@@ -14,41 +14,44 @@ app.controller('AsciiController', function ($scope, $http) {
     $scope.info = "Please enter some text or an image from URL!";
     $scope.textToConvert = "";
     $scope.responseArt = "";
+    $scope.fontList = "";
+
 
     $scope.convert = function () {
+        var asciiDto = {};
+        asciiDto["font"] = $scope.font;
+        asciiDto["text"] = $scope.textToConvert;
+        asciiDto["url"] = $scope.isValidUrl($scope.textToConvert);
+
+        $http({
+            method: "POST",
+            url: baseUrl + '/generate',
+            data: asciiDto
+        }).then(function mySuccess(response) {
+            $scope.responseArt = response.data;
+            console.log("Success" + response.data);
+        }, function myError(response) {
+            $scope.responseArt = "Error: " + response.status + " - " + response.statusText;
+            console.log("Error" + response.statusText);
+        });
+    };
+
+    $scope.getFonts = function(){
+        $http({
+            method: "GET",
+            url: baseUrl + '/fonts',
+        }).then(function mySuccess(response) {
+            $scope.fontList = response.data;
+            console.log("Success" + response.data);
+        }, function myError(response) {
+            console.log("Error" + response.statusText);
+        });
+    };
+
+    $scope.isValidUrl = function (textToConvert) {
         var url = new RegExp(urlImage);
         var image = new RegExp(imageExtension);
-        if ($scope.textToConvert.match(url)) {
-            if ($scope.textToConvert.match(image)) {
-                $http({
-                    method: "POST",
-                    url: baseUrl + 'convertImage',
-                    data: $scope.textToConvert
-                }).then(function mySuccess(response) {
-                    $scope.responseArt = response.data;
-                    console.log("Success" + response.data);
-                }, function myError(response) {
-                    $scope.responseArt = "Error: " + response.status + " - Is not a valid image.";
-                    console.log("Error" + response.statusText);
-                });
-            } else {
-                $scope.responseArt = "Error: Is not a valid image.";
-                console.log("Error" + $scope.responseArt);
-            }
-        } else {
-            $http({
-                method: "POST",
-                url: baseUrl + 'convertText',
-                data: $scope.textToConvert
-            }).then(function mySuccess(response) {
-                $scope.responseArt = response.data;
-                console.log("Success" + response.data);
-            }, function myError(response) {
-                $scope.responseArt = "Error: " + response.status + " - " + response.statusText;
-                console.log("Error" + response.statusText);
-            });
-        }
-
+        return ((textToConvert.match(url)) && (textToConvert.match(image))) ? true : false;
     };
 
     $scope.cleanFields = function () {
@@ -66,5 +69,7 @@ app.controller('AsciiController', function ($scope, $http) {
             downloadLink[0].click();
         }
     };
+
+    $scope.getFonts();
 
 });

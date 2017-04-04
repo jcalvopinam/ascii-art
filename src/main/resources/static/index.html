@@ -34,7 +34,7 @@
             <div class="panel-heading">{{headingTitle}}</div>
             <div class="panel-body">
                 <div class="row-fluid">
-                    <div class="col-lg-9">
+                    <div class="col-md-7">
                         <form name="form">
                             <label>Enter your text: </label>
                             <span ng-show="form.$invalid">Please enter something!</span>
@@ -43,12 +43,18 @@
                                    ng-keypress="($event.charCode==13) ? convert() : return">
                         </form>
                     </div>
-                    <div class="col-lg-3 pull-right button-container">
+                    <div class="col-md-2 button-container">
                         <br/>
-                        <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="convert()">Convert
+                        <select class="form-control" ng-model="font">
+                            <option ng-repeat="font in fontList">{{font}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 button-container">
+                        <br/>
+                        <button class="btn btn-success" ng-disabled="form.$invalid" ng-click="convert()">Convert
                         </button>
-                        <button class="btn btn-default" ng-click="cleanFields()">Clean</button>
-                        <a class="btn btn-success glyphicon glyphicon-download-alt" ng-click="downloadText()"
+                        <button class="btn btn-warning" ng-click="cleanFields()">Clean</button>
+                        <a class="btn btn-primary glyphicon glyphicon-download-alt" ng-click="downloadText()"
                            ng-href="{{ url }}" ng-disabled="responseArt ===''"></a>
                         <br/>
                     </div>
