@@ -19,10 +19,6 @@
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
             <a class="navbar-brand page-scroll" href="#page-top">ASCII ART</a>
         </div>
     </div>
@@ -34,29 +30,32 @@
             <div class="panel-heading">{{headingTitle}}</div>
             <div class="panel-body">
                 <div class="row-fluid">
-                    <div class="col-md-7">
+                    <div class="col-md-12">
                         <form name="form">
-                            <label>Enter your text: </label>
-                            <span ng-show="form.$invalid">Please enter something!</span>
+                            <label>Input: </label>
+                            <span ng-show="form.$invalid">Enter a text or an image from URL and choose a font!</span>
+
+                            <br>
+
                             <input id="newText" type="text" ng-model="textToConvert" autofocus
                                    placeholder="{{info}}" required
-                                   ng-keypress="($event.charCode==13) ? convert() : return">
+                                   ng-keypress="(textToConvert !== undefined || textToConvert !== '') &&
+                                   (font[0] !== undefined) &&
+                                   ($event.charCode==13) ? convert() : return">
+
+                            <select class="form-control" ng-model="font" required>
+                                <option ng-repeat="font in fontList">{{font}}</option>
+                            </select>
+
+                            <button class="btn btn-success" ng-disabled="form.$invalid || font[0] === undefined"
+                                    ng-click="convert()">Convert
+                            </button>
+
+                            <button class="btn btn-warning" ng-click="cleanFields()">Clean</button>
+
+                            <a class="btn btn-primary glyphicon glyphicon-download-alt" ng-click="downloadText()"
+                               ng-href="{{ url }}" ng-disabled="responseArt ===''"></a>
                         </form>
-                    </div>
-                    <div class="col-md-2 button-container">
-                        <br/>
-                        <select class="form-control" ng-model="font">
-                            <option ng-repeat="font in fontList">{{font}}</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 button-container">
-                        <br/>
-                        <button class="btn btn-success" ng-disabled="form.$invalid" ng-click="convert()">Convert
-                        </button>
-                        <button class="btn btn-warning" ng-click="cleanFields()">Clean</button>
-                        <a class="btn btn-primary glyphicon glyphicon-download-alt" ng-click="downloadText()"
-                           ng-href="{{ url }}" ng-disabled="responseArt ===''"></a>
-                        <br/>
                     </div>
                     <hr/>
                     <p>
