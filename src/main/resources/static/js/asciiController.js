@@ -16,7 +16,6 @@ app.controller('AsciiController', function ($scope, $http) {
     $scope.responseArt = "";
     $scope.fontList = "";
 
-
     $scope.convert = function () {
         var asciiDto = {};
         asciiDto["font"] = $scope.font;
@@ -36,7 +35,7 @@ app.controller('AsciiController', function ($scope, $http) {
         });
     };
 
-    $scope.getFonts = function(){
+    $scope.getFonts = function () {
         $http({
             method: "GET",
             url: baseUrl + '/fonts',
@@ -57,6 +56,7 @@ app.controller('AsciiController', function ($scope, $http) {
     $scope.cleanFields = function () {
         $scope.textToConvert = "";
         $scope.responseArt = "";
+        $scope.font = '';
         $("#newText").focus();
     };
 
